@@ -1,9 +1,29 @@
 /* ==========================================
+   Font
+========================================== */
+
+/* Load Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+
+/* ==========================================
    Design Tokens & System Variables
 ========================================== */
+
 :root {
     --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+
+    /* Typography */
+    --font-size-body: 16px;
+    --font-size-small: 14px;
+    --font-size-caption: 14px;
+    --font-size-nav: 15px;
+    --font-size-h1: 32px;
+    --font-size-h2: 24px;
+
+    --line-height-body: 1.5;
+    --line-height-heading: 1.2;
 
     /* Color Palette */
     --bg-body: #fafafa;
@@ -43,9 +63,11 @@
     --transition-base: 0.25s ease;
 }
 
+
 /* ==========================================
    Global Reset & Base
 ========================================== */
+
 *,
 *::before,
 *::after {
@@ -61,10 +83,14 @@ html {
 
 body {
     font-family: var(--font-sans);
+    font-size: var(--font-size-body);
+    font-weight: 400;
     background-color: var(--bg-body);
     color: var(--text-primary);
-    line-height: 1.7;
+    line-height: var(--line-height-body);
+    letter-spacing: normal;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
 }
 
@@ -73,35 +99,57 @@ body {
     outline-offset: 3px;
 }
 
+
 /* ==========================================
    Typography & Section Titles
 ========================================== */
+
 h1 {
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
-    font-weight: 800;
-    line-height: 1.15;
+    font-family: var(--font-sans);
+    font-size: var(--font-size-h1);
+    font-weight: 600;
+    line-height: var(--line-height-heading);
+    letter-spacing: -0.02em;
     color: var(--text-heading);
     text-wrap: balance;
 }
 
 h2 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    font-weight: 700;
+    font-family: var(--font-sans);
+    font-size: var(--font-size-h2);
+    font-weight: 600;
+    line-height: var(--line-height-heading);
+    letter-spacing: -0.01em;
     margin-bottom: 24px;
     text-align: center;
     color: var(--text-heading);
 }
 
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    line-height: var(--line-height-heading);
+    color: var(--text-heading);
+}
+
 p {
-    font-size: 1.05rem;
+    font-family: var(--font-sans);
+    font-size: var(--font-size-body);
+    font-weight: 400;
+    line-height: var(--line-height-body);
     color: var(--text-secondary);
     margin-bottom: 18px;
     overflow-wrap: break-word;
 }
 
+
 /* ==========================================
    Containers & Layout Units
 ========================================== */
+
 .container {
     width: min(1100px, 90%);
     margin: 0 auto;
@@ -116,9 +164,11 @@ p {
     padding: 40px 0;
 }
 
+
 /* ==========================================
    Navigation Bar
 ========================================== */
+
 header {
     position: fixed;
     top: 0;
@@ -141,8 +191,8 @@ header {
 .logo a {
     text-decoration: none;
     color: var(--text-heading);
-    font-weight: 700;
-    font-size: 1.2rem;
+    font-weight: 600;
+    font-size: 18px;
 }
 
 nav {
@@ -153,7 +203,9 @@ nav {
 nav a {
     text-decoration: none;
     color: var(--text-secondary);
+    font-size: var(--font-size-nav);
     font-weight: 500;
+    line-height: 1.4;
     transition: color var(--transition-fast);
 }
 
@@ -161,9 +213,11 @@ nav a:hover {
     color: var(--primary-color);
 }
 
+
 /* ==========================================
    Hero Section
 ========================================== */
+
 .hero {
     display: flex;
     justify-content: center;
@@ -178,23 +232,28 @@ nav a:hover {
 
 .hero h2 {
     margin-top: 15px;
-    font-size: 1.4rem;
+    font-size: 18px;
     font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: normal;
     color: var(--text-secondary);
     text-align: center;
 }
 
 .authors {
     margin-top: 25px;
-    font-size: 1.15rem;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
     color: var(--text-primary);
 }
 
 .affiliation {
     margin-top: 10px;
     color: var(--text-muted);
-    font-size: 0.98rem;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5;
 }
 
 .buttons {
@@ -210,14 +269,15 @@ nav a:hover {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 32px;
+    padding: 11px 28px;
     background: var(--bg-accent-light);
     color: var(--text-heading);
     border: 2px solid var(--border-accent);
     border-radius: var(--radius-pill);
     text-decoration: none;
-    font-weight: 600;
-    font-size: 1.05rem;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.4;
     transition: all var(--transition-fast);
 }
 
@@ -228,7 +288,11 @@ nav a:hover {
     box-shadow: 0 6px 16px rgba(0, 102, 255, 0.08);
 }
 
-/* Hero Media & Abstract */
+
+/* ==========================================
+   Hero Media & Abstract
+========================================== */
+
 .hero-video-container {
     margin: 20px 0 35px;
     width: 100%;
@@ -256,8 +320,9 @@ nav a:hover {
 }
 
 .abstract-box h3 {
-    font-size: 1.4rem;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.2;
     color: var(--text-heading);
     text-align: center;
     margin-bottom: 16px;
@@ -265,14 +330,17 @@ nav a:hover {
 
 .abstract-box p {
     color: #334155;
-    font-size: 1.02rem;
-    line-height: 1.75;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
     margin-bottom: 0;
 }
+
 
 /* ==========================================
    Figures & Captions
 ========================================== */
+
 .figure-container {
     margin: 25px 0 35px;
     text-align: center;
@@ -288,15 +356,18 @@ nav a:hover {
 
 .figure-caption {
     margin-top: 12px;
-    font-size: 0.93rem;
+    font-size: var(--font-size-caption);
+    font-weight: 400;
     color: #444;
     text-align: justify;
-    line-height: 1.6;
+    line-height: 1.5;
 }
+
 
 /* ==========================================
    Qualitative 4-Column 3D Viewer Layout
 ========================================== */
+
 .viewer-container {
     margin-top: 25px;
     display: grid;
@@ -313,15 +384,16 @@ nav a:hover {
 }
 
 .panel-title {
-    font-weight: 600;
-    font-size: 0.88rem;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.4;
     color: #333;
     margin-bottom: 8px;
     text-align: center;
     white-space: nowrap;
 }
 
-.viewer-container video, 
+.viewer-container video,
 .viewer-container canvas,
 #handsCanvasContainer,
 #objectCanvasContainer,
@@ -339,17 +411,20 @@ nav a:hover {
     object-fit: cover;
 }
 
+
 /* ==========================================
    Sequence Selector Gallery Row
 ========================================== */
+
 .sequence-selector-container {
     margin-top: 35px;
     text-align: center;
 }
 
 .sequence-selector-container h3 {
-    font-size: 1.1rem;
+    font-size: 17px;
     font-weight: 600;
+    line-height: 1.3;
     margin-bottom: 16px;
     color: #333;
 }
@@ -375,7 +450,7 @@ nav a:hover {
     align-items: center;
 }
 
-.seq-thumb video, 
+.seq-thumb video,
 .seq-thumb img {
     width: 100%;
     height: 110px;
@@ -387,8 +462,9 @@ nav a:hover {
 
 .seq-thumb span {
     padding: 8px 10px;
-    font-size: 0.88rem;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
     color: #444;
 }
 
@@ -406,16 +482,19 @@ nav a:hover {
     color: var(--primary-color);
 }
 
+
 /* ==========================================
    Academic Tables (LaTeX Booktabs Style)
 ========================================== */
+
 .table-container {
     margin: 35px 0 45px;
     width: 100%;
 }
 
 .table-caption {
-    font-size: 0.94rem;
+    font-size: 14px;
+    font-weight: 400;
     color: #333;
     margin-bottom: 12px;
     line-height: 1.5;
@@ -435,11 +514,12 @@ nav a:hover {
 .academic-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.84rem;
+    font-size: 14px;
+    font-weight: 400;
     color: var(--text-table);
 }
 
-.academic-table th, 
+.academic-table th,
 .academic-table td {
     padding: 8px 12px;
     white-space: nowrap;
@@ -451,7 +531,9 @@ nav a:hover {
     text-align: left !important;
 }
 
+
 /* Booktabs Styling Rules */
+
 .academic-table thead tr:first-child th {
     border-top: 2px solid var(--border-dark);
     padding-top: 10px;
@@ -464,7 +546,7 @@ nav a:hover {
 .academic-table thead tr:last-child th {
     border-bottom: 2px solid var(--border-dark);
     padding-bottom: 10px;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--text-heading);
 }
 
@@ -494,16 +576,19 @@ nav a:hover {
     color: #64748b;
 }
 
+
 /* ==========================================
    Citation Code Block & Footer
 ========================================== */
+
 pre {
     margin-top: 25px;
     background: var(--bg-muted);
     padding: 22px;
     border-radius: var(--radius-lg);
     overflow-x: auto;
-    font-size: 0.95rem;
+    font-size: 15px;
+    line-height: 1.5;
     border: 1px solid #e6e6e6;
 }
 
@@ -516,12 +601,16 @@ footer {
     padding: 40px;
     text-align: center;
     color: #888;
+    font-size: 14px;
+    line-height: 1.5;
     border-top: 1px solid var(--border-subtle);
 }
+
 
 /* ==========================================
    Responsive Layout Adaptation
 ========================================== */
+
 @media (max-width: 1300px) {
     .viewer-container {
         grid-template-columns: repeat(2, 1fr);
@@ -529,6 +618,7 @@ footer {
 }
 
 @media (max-width: 768px) {
+
     .nav-container {
         flex-direction: column;
         justify-content: center;
@@ -539,7 +629,7 @@ footer {
 
     nav {
         gap: 16px;
-        font-size: 0.9rem;
+        font-size: 14px;
     }
 
     .viewer-container {
@@ -554,8 +644,20 @@ footer {
         width: 130px;
     }
 
-    .seq-thumb video, 
+    .seq-thumb video,
     .seq-thumb img {
         height: 80px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    p {
+        font-size: 16px;
     }
 }
