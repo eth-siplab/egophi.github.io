@@ -1,8 +1,54 @@
 /* ==========================================
-   Global Styles
+   Design Tokens & System Variables
 ========================================== */
+:root {
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
 
-* {
+    /* Color Palette */
+    --bg-body: #fafafa;
+    --bg-surface: #ffffff;
+    --bg-muted: #f4f4f4;
+    --bg-accent-light: #f0f7ff;
+    --bg-accent-hover: #dbeafe;
+
+    --text-primary: #222222;
+    --text-secondary: #555555;
+    --text-muted: #666666;
+    --text-heading: #0f172a;
+    --text-table: #1a202c;
+
+    --border-subtle: #ececec;
+    --border-light: #e8e8e8;
+    --border-medium: #e0e0e0;
+    --border-accent: #bfdbfe;
+    --border-accent-hover: #93c5fd;
+    --border-dark: #111111;
+
+    --primary-color: #0066ff;
+    --primary-glow: rgba(0, 102, 255, 0.35);
+
+    /* Radii & Shadows */
+    --radius-sm: 8px;
+    --radius-md: 10px;
+    --radius-lg: 12px;
+    --radius-pill: 50px;
+
+    --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 6px 24px rgba(0, 0, 0, 0.08);
+    --shadow-blue: 0 4px 20px rgba(0, 102, 255, 0.05);
+
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-base: 0.25s ease;
+}
+
+/* ==========================================
+   Global Reset & Base
+========================================== */
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -10,51 +56,60 @@
 
 html {
     scroll-behavior: smooth;
+    color-scheme: light;
 }
 
 body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background: #fafafa;
-    color: #222;
+    font-family: var(--font-sans);
+    background-color: var(--bg-body);
+    color: var(--text-primary);
     line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
 }
 
 /* ==========================================
    Typography & Section Titles
 ========================================== */
-
 h1 {
-    font-size: 3.5rem;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
     font-weight: 800;
     line-height: 1.15;
+    color: var(--text-heading);
+    text-wrap: balance;
 }
 
-/* Centered section names */
 h2 {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 700;
     margin-bottom: 24px;
     text-align: center;
+    color: var(--text-heading);
 }
 
 p {
     font-size: 1.05rem;
-    color: #555;
+    color: var(--text-secondary);
     margin-bottom: 18px;
+    overflow-wrap: break-word;
 }
 
 /* ==========================================
-   Containers
+   Containers & Layout Units
 ========================================== */
-
 .container {
     width: min(1100px, 90%);
-    margin: auto;
+    margin: 0 auto;
 }
 
 .wide-container {
     width: min(1600px, 96%);
-    margin: auto;
+    margin: 0 auto;
 }
 
 .content-section {
@@ -64,20 +119,19 @@ p {
 /* ==========================================
    Navigation Bar
 ========================================== */
-
 header {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, .95);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid var(--border-light);
     z-index: 1000;
 }
 
 .nav-container {
     width: min(1300px, 92%);
-    margin: auto;
+    margin: 0 auto;
     height: 72px;
     display: flex;
     justify-content: space-between;
@@ -86,7 +140,7 @@ header {
 
 .logo a {
     text-decoration: none;
-    color: #111;
+    color: var(--text-heading);
     font-weight: 700;
     font-size: 1.2rem;
 }
@@ -98,19 +152,18 @@ nav {
 
 nav a {
     text-decoration: none;
-    color: #555;
+    color: var(--text-secondary);
     font-weight: 500;
-    transition: .25s;
+    transition: color var(--transition-fast);
 }
 
 nav a:hover {
-    color: #0066ff;
+    color: var(--primary-color);
 }
 
 /* ==========================================
-   Hero Section & Header Layout
+   Hero Section
 ========================================== */
-
 .hero {
     display: flex;
     justify-content: center;
@@ -127,7 +180,7 @@ nav a:hover {
     margin-top: 15px;
     font-size: 1.4rem;
     font-weight: 400;
-    color: #555;
+    color: var(--text-secondary);
     text-align: center;
 }
 
@@ -135,12 +188,12 @@ nav a:hover {
     margin-top: 25px;
     font-size: 1.15rem;
     font-weight: 600;
-    color: #222;
+    color: var(--text-primary);
 }
 
 .affiliation {
     margin-top: 10px;
-    color: #666;
+    color: var(--text-muted);
     font-size: 0.98rem;
 }
 
@@ -157,60 +210,55 @@ nav a:hover {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 32px; /* Wider padding for the ellipse look */
-    
-    background: #f0f7ff; /* Light blue background */
-    color: #111111; /* Black text */
-    border: 2px solid #bfdbfe; /* Light blue outline to match the image style */
-    border-radius: 50px; /* Creates the pill/ellipse shape */
-    
+    padding: 12px 32px;
+    background: var(--bg-accent-light);
+    color: var(--text-heading);
+    border: 2px solid var(--border-accent);
+    border-radius: var(--radius-pill);
     text-decoration: none;
     font-weight: 600;
     font-size: 1.05rem;
-    transition: all 0.2s ease;
+    transition: all var(--transition-fast);
 }
 
 .button:hover {
-    background: #dbeafe; /* Slightly darker light blue on hover */
-    border-color: #93c5fd; /* Slightly darker border on hover */
+    background: var(--bg-accent-hover);
+    border-color: var(--border-accent-hover);
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 102, 255, 0.08); /* Very soft shadow */
+    box-shadow: 0 6px 16px rgba(0, 102, 255, 0.08);
 }
 
-/* Standalone Hero Video directly under action buttons */
+/* Hero Media & Abstract */
 .hero-video-container {
-    margin-top: 20px;
-    margin-bottom: 35px;
+    margin: 20px 0 35px;
     width: 100%;
 }
 
 .hero-video-container video {
     width: 100%;
     max-height: 520px;
-    border-radius: 12px;
-    border: 1px solid #e0e0e0;
-    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-medium);
+    box-shadow: var(--shadow-md);
     object-fit: cover;
     display: block;
 }
 
-/* Light Blue Abstract Box */
 .abstract-box {
-    background-color: #f0f7ff;
-    border: 1px solid #bfdbfe;
-    border-left: 5px solid #0066ff;
-    border-radius: 12px;
+    background-color: var(--bg-accent-light);
+    border: 1px solid var(--border-accent);
+    border-left: 5px solid var(--primary-color);
+    border-radius: var(--radius-lg);
     padding: 30px 36px;
-    margin-top: 35px;
-    margin-bottom: 45px;
+    margin: 35px 0 45px;
     text-align: justify;
-    box-shadow: 0 4px 20px rgba(0, 102, 255, 0.05);
+    box-shadow: var(--shadow-blue);
 }
 
 .abstract-box h3 {
     font-size: 1.4rem;
     font-weight: 700;
-    color: #0f172a;
+    color: var(--text-heading);
     text-align: center;
     margin-bottom: 16px;
 }
@@ -225,18 +273,16 @@ nav a:hover {
 /* ==========================================
    Figures & Captions
 ========================================== */
-
 .figure-container {
-    margin-top: 25px;
-    margin-bottom: 35px;
+    margin: 25px 0 35px;
     text-align: center;
 }
 
 .figure-container img {
     max-width: 100%;
     height: auto;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
     border: 1px solid #eaeaea;
 }
 
@@ -251,7 +297,6 @@ nav a:hover {
 /* ==========================================
    Qualitative 4-Column 3D Viewer Layout
 ========================================== */
-
 .viewer-container {
     margin-top: 25px;
     display: grid;
@@ -287,8 +332,8 @@ nav a:hover {
     width: 100%;
     height: 360px;
     background: #f4f4f4;
-    border-radius: 12px;
-    border: 1px solid #e0e0e0;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-medium);
     display: block;
     overflow: hidden;
     object-fit: cover;
@@ -297,7 +342,6 @@ nav a:hover {
 /* ==========================================
    Sequence Selector Gallery Row
 ========================================== */
-
 .sequence-selector-container {
     margin-top: 35px;
     text-align: center;
@@ -320,12 +364,12 @@ nav a:hover {
 .seq-thumb {
     width: 180px;
     cursor: pointer;
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     overflow: hidden;
     border: 3px solid transparent;
-    background: #ffffff;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-    transition: all 0.25s ease;
+    background: var(--bg-surface);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-base);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -354,21 +398,19 @@ nav a:hover {
 }
 
 .seq-thumb.active {
-    border-color: #0066ff;
-    box-shadow: 0 0 16px rgba(0, 102, 255, 0.35);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 16px var(--primary-glow);
 }
 
 .seq-thumb.active span {
-    color: #0066ff;
+    color: var(--primary-color);
 }
 
 /* ==========================================
    Academic Tables (LaTeX Booktabs Style)
 ========================================== */
-
 .table-container {
-    margin-top: 35px;
-    margin-bottom: 45px;
+    margin: 35px 0 45px;
     width: 100%;
 }
 
@@ -383,8 +425,8 @@ nav a:hover {
 .table-scroll {
     width: 100%;
     overflow-x: auto;
-    background: #ffffff;
-    border-radius: 10px;
+    background: var(--bg-surface);
+    border-radius: var(--radius-md);
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
     border: 1px solid #e2e8f0;
     padding: 16px;
@@ -394,7 +436,7 @@ nav a:hover {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.84rem;
-    color: #1a202c;
+    color: var(--text-table);
 }
 
 .academic-table th, 
@@ -409,9 +451,9 @@ nav a:hover {
     text-align: left !important;
 }
 
-/* Booktabs Rules */
+/* Booktabs Styling Rules */
 .academic-table thead tr:first-child th {
-    border-top: 2px solid #111;
+    border-top: 2px solid var(--border-dark);
     padding-top: 10px;
 }
 
@@ -420,14 +462,14 @@ nav a:hover {
 }
 
 .academic-table thead tr:last-child th {
-    border-bottom: 2px solid #111;
+    border-bottom: 2px solid var(--border-dark);
     padding-bottom: 10px;
     font-weight: 700;
-    color: #0f172a;
+    color: var(--text-heading);
 }
 
 .academic-table tbody tr:last-child td {
-    border-bottom: 2px solid #111;
+    border-bottom: 2px solid var(--border-dark);
     padding-bottom: 10px;
 }
 
@@ -444,7 +486,7 @@ nav a:hover {
     border-top: 1px solid #cbd5e1;
     border-bottom: 1px solid #cbd5e1;
     padding: 8px 12px;
-    color: #0f172a;
+    color: var(--text-heading);
 }
 
 .academic-table td.italic-text {
@@ -455,19 +497,18 @@ nav a:hover {
 /* ==========================================
    Citation Code Block & Footer
 ========================================== */
-
 pre {
     margin-top: 25px;
-    background: #f4f4f4;
+    background: var(--bg-muted);
     padding: 22px;
-    border-radius: 12px;
+    border-radius: var(--radius-lg);
     overflow-x: auto;
-    font-size: .95rem;
+    font-size: 0.95rem;
     border: 1px solid #e6e6e6;
 }
 
 code {
-    font-family: monospace;
+    font-family: var(--font-mono);
 }
 
 footer {
@@ -475,13 +516,12 @@ footer {
     padding: 40px;
     text-align: center;
     color: #888;
-    border-top: 1px solid #ececec;
+    border-top: 1px solid var(--border-subtle);
 }
 
 /* ==========================================
    Responsive Layout Adaptation
 ========================================== */
-
 @media (max-width: 1300px) {
     .viewer-container {
         grid-template-columns: repeat(2, 1fr);
@@ -499,11 +539,7 @@ footer {
 
     nav {
         gap: 16px;
-        font-size: .9rem;
-    }
-
-    h1 {
-        font-size: 2.5rem;
+        font-size: 0.9rem;
     }
 
     .viewer-container {
@@ -518,7 +554,8 @@ footer {
         width: 130px;
     }
 
-    .seq-thumb video, .seq-thumb img {
+    .seq-thumb video, 
+    .seq-thumb img {
         height: 80px;
     }
 }
